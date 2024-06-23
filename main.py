@@ -1,15 +1,17 @@
 # !/usr/bin/env python3
 # -*- coding: utf-8 -*- #
 
-# @DateTime : 2024/06/22 16:29:02
+# @DateTime : 2024/06/23 10:39:56
 # @Author   : 涂梓宸
 # @Contact  : turtle2024@yeah.net
 # @File     : main.py
 # @Version  : v1.9.15.20240621_alpha
 
 import tkinter
+import _tkinter
 from tkinter import messagebox, colorchooser
 import random
+import tkinter.messagebox
 import tkinter.simpledialog
 import json
 
@@ -21,6 +23,16 @@ def root_window(): # 根窗口/主窗口
 
     root = tkinter.Tk()
     root.title("计算练习")
+    
+    # 设置窗口图标
+    
+    try:
+        root.iconbitmap('logo.ico')
+    except _tkinter.TclError:
+        tkinter.messagebox.showerror("错误", "_tkinter.TclError：缺失”logo.dll“")   
+        root.quit()     # 退出程序
+        root.destroy() 
+        exit(0)
 
     screenwidth = root.winfo_screenwidth()
     screenheight = root.winfo_screenheight()
@@ -28,8 +40,6 @@ def root_window(): # 根窗口/主窗口
     height = 150
     left = (screenwidth - width) / 2
     top = (screenheight - height) / 2
-
-    root.iconbitmap('logo.ico')
 
     root.geometry("%dx%d+%d+%d" % (width, height, left, top))
     root.resizable(0, 0)
@@ -51,7 +61,7 @@ def root_window(): # 根窗口/主窗口
     tkinter.Button(root, text="初级(只有加减法)", command=low).place(x=0, y=0)
     tkinter.Button(root, text="中级(加减乘除法)", command=medium).place(x=0, y=60)
     tkinter.Button(root, text="高级(乘除法较多)", command=tall).place(x=0, y=120) 
-    tkinter.Button(root, text="退出", command=exit_jl).place(x=205, y=0)
+    tkinter.Button(root, text="退出", command=exit_ctp).place(x=205, y=0)
     tkinter.Button(root, text="设置", command=settings).place(x=205, y=60)
     tkinter.Button(root, text="关于", command=concerning).place(x=205, y=120)
 
@@ -299,7 +309,7 @@ def tall(): #高级
     root.deiconify()
 
 
-def exit_jl():
+def exit_ctp():
     root.withdraw()
 
     true_or_false_exit = messagebox.askyesno("计算练习", "确认要退出吗？")
@@ -336,10 +346,11 @@ def settings():
 def concerning():
     root.withdraw()
 
-    messagebox.showinfo("关于计算练习", "作者：涂梓宸\n版本：v1.9.14.20240622_alpha\n特别鸣谢：无")
+    messagebox.showinfo("关于计算练习", "作者：涂梓宸\n版本：v1.9.15.20240623_alpha\n特别鸣谢：无")
 
     root.deiconify()
 
+# mian
 
 if __name__ == '__main__':
     root_window()
